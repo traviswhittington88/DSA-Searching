@@ -1,0 +1,107 @@
+Search algorithms
+
+Objective: Implement common algorithms
+
+Explore 4 different algorithms for searching through arrays 
+and trees.
+
+
+Key Terms
+  - Linear Search
+  - Binary Search
+  - Divide and conquer
+  - Depth-first search (DFS)
+  - Breadth-first search (DFS)
+  - In-order search
+  - Pre-ordering
+  - Post-ordering
+
+Linear Search
+
+look through an array 1-by-1
+
+Classic example, indexOf function
+
+function indexOf(array, value) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === value) {
+      return i;
+    }
+  }
+  return -1;  //false, item wasn't found
+}
+
+Best case O(1) , avg case O(n), worst case O(n)
+
+Binary Search
+- Faster than Linear
+- Only works on sorted arrays.. :(
+
+for example, guess a number between 1 & 100
+  - always guess in the middle of the range
+  - if 50 is too high, go between 0 and 50 @ 25
+  - if search is too low go to 75 between 50 & 100
+  - if 25 is too high go to 13 (rounding up)
+  - and so on....
+
+Principle: Divide the range in half each time
+- common in algorithms, named the Divide and conquer approach
+
+Binary Search indexOf algorithm.. see index.js
+
+Best case is that the item you are searching for is in the middle of the array
+this would give you O(1) time complexity
+
+With each iteration you cut the area you have to search by 1/2. 
+Meaning worst and avg case running times are both O(log(n)).
+
+Searching and Traversal in a tree
+
+- Can search a number of ways but most common are 
+  - DFS (Depth First Search)
+  - BFS (Breadth First Search)
+
+Depth-first search (DFS)
+
+- In a DFS you start from a given node (usually the root) and traverse as 
+far as you can down. When you reach a node, which has no children (leaf node) or
+all nodes on its path have been visited, you start backtracking. 
+
+To take a look at how this works set up a BST structure..
+
+class BinarySearchTree {
+  constructor(key = null, value = null, parent = null) {
+    this.key = key;
+    this.value = value;
+    this.parent = parent;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+
+Different traversal methods for dsf 
+  - in-order: left-branch, node itself, right-branch
+  - pre-order: (parent, left child, right child) node is handled before branches
+  - post-order: node is handled after branches (left-child, right-child, parent)
+
+** Each ordering will give you the node values in a different order
+
+
+Breadth-first search
+
+Works "across" the rows of a tree 
+  - so top row is handled first
+  - second row second, etc
+  - tree is visited level by level
+- in order to carry out a BFS you need a FIFO queue 
+  so you can store all the "siblings" in the queue and process them 
+  in the correct order.
+
+  How?
+- when you visit a node you add it to the queue
+- the nodes are then removed from the queue and their children visited
+  adding more values into the queue
+    - the time complexity is O(n) because each node needs to be visited
+
+see index.js for BFS 
